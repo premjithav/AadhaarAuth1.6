@@ -90,14 +90,28 @@ int main(void)
 	char *hname = "auth.uidai.gov.in";
 	char *page = "/1.6/public/9/9/MKzX8dnY5qyuO4z8neQPDqrSCMAU5pCS32obnzl83xwtFdi45gwK6QA";
 	unsigned char *poststr;
-	char *template_data ="Rk1SACAyMAAAAADkAAgAyQFnAMUAxQEAAAARIQBqAGsgPgCIAG0fRwC2AG2dSQBVAIUjPABuALShMgCxAL0jMAByAM6lPgCmAN2kQQBwAN8qNAB1AN8mPADJAOcgOQA8AOorNABoAOomOQC+AO2fMQDFAPqlSgCvAP8lRQB8AQuhPABwAQ4fMgB7ASqcRADAAS4iNwCkATMeMwCFATYeNwBLATYwMQBWATcoMQCkATecMQBEATwyMgBJAUciQQCkAU8cNQB9AVQWNgCEAVUVRACoAVgYOgBBAV69NgCsAWeYNwAA";
+	//char *template_data ="Rk1SACAyMAAAAADkAAgAyQFnAMUAxQEAAAARIQBqAGsgPgCIAG0fRwC2AG2dSQBVAIUjPABuALShMgCxAL0jMAByAM6lPgCmAN2kQQBwAN8qNAB1AN8mPADJAOcgOQA8AOorNABoAOomOQC+AO2fMQDFAPqlSgCvAP8lRQB8AQuhPABwAQ4fMgB7ASqcRADAAS4iNwCkATMeMwCFATYeNwBLATYwMQBWATcoMQCkATecMQBEATwyMgBJAUciQQCkAU8cNQB9AVQWNgCEAVUVRACoAVgYOgBBAV69NgCsAWeYNwAA";
 	//*******************************************************
 
 	char str[50];
 	struct hostent *hptr;
+	/************************************************************************/
+	FILE *fileptr;
+	unsigned char *template_data;
+	long filelen;
 
-	poststr = authxml_demographic_details("999999990019","Shivshankar Choudhury");
-	//poststr = biometric_proto_details("999999990026", template_data, strlen(template_data));
+	fileptr = fopen("bio.bin", "rb");  // Open the file in binary mode
+	fseek(fileptr, 0, SEEK_END);          // Jump to the end of the file
+	filelen = ftell(fileptr);             // Get the current byte offset in the file
+	rewind(fileptr);                      // Jump back to the beginning of the file
+	
+	template_data = (char *)malloc((filelen)*sizeof(char)); // Enough memory for file + \0
+	fread(template_data, filelen, 1, fileptr); // Read in the entire file
+	fclose(fileptr); // Close the file
+	/************************************************************************/
+	//poststr = authxml_demographic_details("999999990019","Shivshankar Choudhury");
+	printf("File length %d,str %d\n",filelen);
+	poststr = biometric_proto_details("999999990026", template_data, filelen);
 	//poststr = authxml_biometric_with_fdc("999999990019","", template_data);
 	//poststr =authxml_biometric("999999990019",template_data);	
 

@@ -216,7 +216,7 @@ unsigned char* pidxml_biometric(char *tmplData)
 	 Generate Biometric  - Auth Xml
 ***************************************************/
 
-int get_biometric_protobuff_pid(char **buff, int *len, char *template_data, int template_len)
+int get_biometric_protobuff_pid(char **buff, int *len,unsigned char *template_data, int template_len)
 {
     In__Gov__Uidai__Authserver__Protobuf__Pid pid = IN__GOV__UIDAI__AUTHSERVER__PROTOBUF__PID__INIT; // Pid
     In__Gov__Uidai__Authserver__Protobuf__Demo demo = IN__GOV__UIDAI__AUTHSERVER__PROTOBUF__DEMO__INIT; // demo
