@@ -45,8 +45,8 @@
 #include <openssl/asn1.h>
 #include <openssl/pkcs12.h>
 
-#define UIDAI_PUBLIC_CERTIFICATE "/tmp/uidai_auth_stage.cer"
-#define AUA_PRIVATE_CERTIFICATE "/tmp/public.p12"
+#define UIDAI_PUBLIC_CERTIFICATE "/home/premjith/Desktop/AADHAR/AadhaarAuth1.6-master/uidai_auth_stage.cer"
+#define AUA_PRIVATE_CERTIFICATE "/home/premjith/Desktop/AADHAR/AadhaarAuth1.6-master/public-may2012.p12"
 
 #define MAX_PUBKEY_SIZE   256
 #define RSA_KEY_OFFSET    27
@@ -59,7 +59,7 @@
 
 #define KEYPASS "public"
 
-/*unsigned char *uid_get_skey_data (unsigned char *key);
+unsigned char *uid_get_skey_data (unsigned char *key);
 unsigned char *uid_get_aes_encrypted_data (unsigned char *in, int inlen, 
-		 unsigned char *key);*/
+		 unsigned char *key);
 #endif

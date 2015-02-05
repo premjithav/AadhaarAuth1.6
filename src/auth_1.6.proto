@@ -1,4 +1,4 @@
-package pbuf;
+package in.gov.uidai.authserver.protobuf;
 
 message Pid {
 	required string ver = 1;
@@ -6,10 +6,6 @@ message Pid {
 	optional Demo demo = 3;
 	optional Bios bios = 4;
 	optional Pv pv = 5;
-	required string ts1 = 6;
-	required string ts2 = 7;
-	required string ts3 = 8;
-	optional string ts4 = 9;
 }
 
 message Demo {
@@ -17,7 +13,6 @@ message Demo {
 	optional Pi pi = 2;
 	optional Pa pa = 3;
 	optional Pfa pfa = 4;
-	required string name = 5;
 }
 
 enum LangCode {
@@ -128,6 +123,7 @@ enum Position {
 	RIGHT_MIDDLE = 10;
 	RIGHT_RING = 11;
 	RIGHT_THUMB = 12;
+	UNKNOWN = 13;
 }
 
 message Pv {

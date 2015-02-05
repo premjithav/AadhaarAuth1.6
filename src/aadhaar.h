@@ -81,7 +81,7 @@ extern "C" {
 /*! \def LICENCE_KEY_ONE
  * \brief Licence Key, Used by AuthXml lk attribute.
  */
-#define LICENCE_KEY_ONE "MKg8njN6O+QRUmYF+TrbBUCqlrCnbN/Ns6hYbnnaOk99e5UGNhhE/xQ="
+#define LICENCE_KEY_ONE "MEWs4XwP0AzUVGSlKwZkMqeHJqyOvzIfz1rxEFm1uu0cRhoxjeWcIqY"
 
 char duid[16];
 char fdc[11]; // fdc attribute

@@ -216,11 +216,11 @@ unsigned char* pidxml_biometric(char *tmplData)
 	 Generate Biometric  - Auth Xml
 ***************************************************/
 
-int get_biometric_protobuff_pid(void **buff, int *len, char *template_data, int template_len)
+int get_biometric_protobuff_pid(char **buff, int *len, char *template_data, int template_len)
 {
-    Pbuf__Pid pid = PBUF__PID__INIT; // Pid
-    Pbuf__Demo demo = PBUF__DEMO__INIT; // demo
-    Pbuf__Bios bios = PBUF__BIOS__INIT; //bios
+    In__Gov__Uidai__Authserver__Protobuf__Pid pid = IN__GOV__UIDAI__AUTHSERVER__PROTOBUF__PID__INIT; // Pid
+    In__Gov__Uidai__Authserver__Protobuf__Demo demo = IN__GOV__UIDAI__AUTHSERVER__PROTOBUF__DEMO__INIT; // demo
+    In__Gov__Uidai__Authserver__Protobuf__Bios bios = IN__GOV__UIDAI__AUTHSERVER__PROTOBUF__BIOS__INIT; //bios
 
     pid.demo = &demo;
     pid.bios = &bios;
@@ -242,28 +242,28 @@ int get_biometric_protobuff_pid(void **buff, int *len, char *template_data, int 
 
      bios.n_bio = 1; //No of finger prints
      if( bios.n_bio > 0){
-         bios.bio = (Pbuf__Bio **)malloc((sizeof(Pbuf__Bio **)) * bios.n_bio );
+         bios.bio = (In__Gov__Uidai__Authserver__Protobuf__Bio **)malloc((sizeof(In__Gov__Uidai__Authserver__Protobuf__Bio **)) * bios.n_bio );
      }
 
      int i;
     
      for(i=0; i<bios.n_bio; i++) {
          printf("i = %d\n", i);
-         Pbuf__Bio bio = PBUF__BIO__INIT;
+         In__Gov__Uidai__Authserver__Protobuf__Bio bio = IN__GOV__UIDAI__AUTHSERVER__PROTOBUF__BIO__INIT;
          bios.bio[i] = &bio;
          printf("i = %d\n", i);
 
 
-         bio.posh = 1; //TODO The value should be set to UNKNOWN
-         bio.type = PBUF__BIO_TYPE__FMR; //Assumed
+         bio.posh = IN__GOV__UIDAI__AUTHSERVER__PROTOBUF__POSITION__UNKNOWN; //TODO The value should be set to UNKNOWN
+         bio.type = IN__GOV__UIDAI__AUTHSERVER__PROTOBUF__BIO_TYPE__FMR; //Assumed
 
          (bio.content).len = template_len;
          (bio.content).data = template_data;
      }
 
-     *len = pbuf__pid__get_packed_size(&pid);
+     *len = in__gov__uidai__authserver__protobuf__pid__get_packed_size(&pid);
      *buff = malloc(*len);
-     pbuf__pid__pack(&pid,*buff);
+     in__gov__uidai__authserver__protobuf__pid__pack(&pid,*buff);
 
      //TODO add all the elements
      free(pid.ver); free(pid.ts);
@@ -567,7 +567,7 @@ unsigned char* authxml_demographic_details(char *puid, char *pname)
     xmlSetProp(n, "idc", "NC"); //Iris device code
     xmlSetProp(n, "pip", "NA"); //Public IP address of the device
     xmlSetProp(n, "lot", "P"); //Location type.
-    xmlSetProp(n, "lov", "560094"); //Location Value
+    xmlSetProp(n, "lov", "695033"); //Location Value
     xmlAddChild(root, n);
 
 	char bufExpiryStr[12];
@@ -662,6 +662,7 @@ unsigned char* biometric_proto_details(char *puid, char *template_data, int temp
 	xmlSetProp(n, "pa", "n");
 	xmlSetProp(n, "pfa", "n");
 	xmlSetProp(n, "pi", "n");
+	xmlSetProp(n, "bt", "FMR");
 	xmlAddChild(root, n);
 
 
@@ -747,8 +748,7 @@ int uid_auth_demographic_details(char *puid, char *name)
 	return res;
 }
 
-#if 0
-  // For Testing
+/*
 int main()
 {
 	authxml_demographic_details("999999990019","Shivshankar Choudhury");
@@ -756,7 +756,6 @@ int main()
     //biometric_proto_details("999999990019", template_data, template_data_len);
 
     return 0;
-}
+}*/
 
-#endif
 
