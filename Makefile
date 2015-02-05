@@ -6,4 +6,4 @@ LDFLAGS= -lcrypto -I/usr/include/libxml2 -lxml2 -I/usr/local/include/xmlsec1 -lx
 all:
 	$(CC) $(CFLAGS) src/http_post.c src/aadhaar.c src/uid_auth.c src/auth_1.6.pb-c.c -o AuthClient $(LDFLAGS)
 clean:
-	rm -f *.o *~ AuthClient
+	rm -f *.o *~ src/*~ AuthClient

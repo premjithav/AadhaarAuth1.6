@@ -130,7 +130,16 @@ unsigned char * authxml_biometric(char *puid, char *tmplData);
  * \return xmldata.
  */
 unsigned char * authxml_biometric_with_fdc(char *puid, char *pfdc, char *tmplData);
-
+/*!\fn unsigned char * biometric_proto_details(char *puid, char *template_data, int template_len)
+ * \brief This function is used to generate Biometric Auth XML by sending parameter values of Aadhaar id, fingerprint template data and Template length. Returns XML data
+ *
+ * \param puid
+ * \param template_data
+ * \param template_len
+ *
+ * \return preDigSignedXmlBuff
+ */
+unsigned char * biometric_proto_details(char *puid, char *template_data, int template_len);
 
 /*!\fn int validate_uid(char *uId)
  * \brief This function is used to validate Aadhaar ID by sending parameter value of Aadhaar id. Return value 0 or -1.

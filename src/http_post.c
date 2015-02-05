@@ -97,8 +97,8 @@ int main(void)
 	struct hostent *hptr;
 	/************************************************************************/
 	FILE *fileptr;
-	unsigned char *template_data;
-	long filelen;
+	char *template_data;
+	int filelen;
 
 	fileptr = fopen("bio.bin", "rb");  // Open the file in binary mode
 	fseek(fileptr, 0, SEEK_END);          // Jump to the end of the file
@@ -109,11 +109,8 @@ int main(void)
 	fread(template_data, filelen, 1, fileptr); // Read in the entire file
 	fclose(fileptr); // Close the file
 	/************************************************************************/
-	//poststr = authxml_demographic_details("999999990019","Shivshankar Choudhury");
-	printf("File length %d,str %d\n",filelen);
+	//poststr = authxml_demographic_details("999999990019","Shivshankar Choudhury");	
 	poststr = biometric_proto_details("999999990026", template_data, filelen);
-	//poststr = authxml_biometric_with_fdc("999999990019","", template_data);
-	//poststr =authxml_biometric("999999990019",template_data);	
 
 	if ((hptr = gethostbyname(hname)) == NULL) {
 		fprintf(stderr, " gethostbyname error for host: %s: %s",
